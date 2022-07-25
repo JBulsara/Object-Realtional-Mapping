@@ -1,7 +1,6 @@
 
 const express = require('express');
-const routes = require('./routes/api')
-// Import Sequelize Connection
+const routes = require('./routes/api/index')
 require('dotenv').config()
 console.log(process.env)
 const sequelize = require('./config/connection');
@@ -14,7 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-// Sync sequelize models to the database, then turn on the server
 sequelize.sync({ force: true, alter: true }).then (() => {
   app.listen(PORT, () => 
     console.log(`App listening on port ${PORT}!`));
